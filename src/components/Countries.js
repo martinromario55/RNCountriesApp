@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import Search from './Search'
 
-export default function Countries({ countries, results }) {
+export default function Countries({ countries }) {
   const navigation = useNavigation()
   // const data = [
   //   {
@@ -64,73 +64,27 @@ export default function Countries({ countries, results }) {
   //   },
   // ]
   const renderItem = ({ item, index }) => {
-    if (results > 0) {
-      return (
-        <TouchableOpacity
-          key={index}
-          className="items-center my-2 w-[100%]"
-          onPress={() => navigation.navigate('Details', { item })}
-        >
-          <View className="border border-white border-4 w-[100%] h-52 rounded">
-            {/* Image with dummy file */}
-            <Image
-              source={{
-                uri: results.flags.png || 'https://picsum.photos/200/300',
-              }}
-              resizeMode="cover"
-              style={{ width: '100%', height: '80%', borderRadius: 5 }}
-            />
-            <Text className="mt-4 pl-1 font-bold capitalize">
-              {item.name.common}
-            </Text>
-          </View>
-        </TouchableOpacity>
-      )
-    } else {
-      return (
-        <TouchableOpacity
-          key={index}
-          className="items-center my-2 w-[100%]"
-          onPress={() => navigation.navigate('Details', { item })}
-        >
-          <View className="border border-white border-4 w-[100%] h-52 rounded">
-            {/* Image with dummy file */}
-            <Image
-              source={{
-                uri: item.flags.png || 'https://picsum.photos/200/300',
-              }}
-              resizeMode="cover"
-              style={{ width: '100%', height: '80%', borderRadius: 5 }}
-            />
-            <Text className="mt-4 pl-1 font-bold capitalize">
-              {item.name.common}
-            </Text>
-          </View>
-        </TouchableOpacity>
-      )
-    }
-    // console.log(item.country)
-    // return (
-    //   <TouchableOpacity
-    //     key={index}
-    //     className="items-center my-2 w-[100%]"
-    //     onPress={() => navigation.navigate('Details', { item })}
-    //   >
-    //     <View className="border border-white border-4 w-[100%] h-52 rounded">
-    //       {/* Image with dummy file */}
-    //       <Image
-    //         source={{
-    //           uri: item.flags.png || 'https://picsum.photos/200/300',
-    //         }}
-    //         resizeMode="cover"
-    //         style={{ width: '100%', height: '80%', borderRadius: 5 }}
-    //       />
-    //       <Text className="mt-4 pl-1 font-bold capitalize">
-    //         {item.name.common}
-    //       </Text>
-    //     </View>
-    //   </TouchableOpacity>
-    // )
+    return (
+      <TouchableOpacity
+        key={index}
+        className="items-center my-2 w-[100%]"
+        onPress={() => navigation.navigate('Details', { item })}
+      >
+        <View className="border border-white border-4 w-[100%] h-52 rounded">
+          {/* Image with dummy file */}
+          <Image
+            source={{
+              uri: item.flags.png || 'https://picsum.photos/200/300',
+            }}
+            resizeMode="cover"
+            style={{ width: '100%', height: '80%', borderRadius: 5 }}
+          />
+          <Text className="mt-4 pl-1 font-bold capitalize">
+            {item.name.common}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    )
   }
   return (
     <FlatList

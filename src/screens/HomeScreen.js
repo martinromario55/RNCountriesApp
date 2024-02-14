@@ -15,8 +15,6 @@ import { StatusBar } from 'expo-status-bar'
 export default function HomeScreen() {
   const [countries, setCountries] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-  const [searchTerm, setSearchTerm] = useState('')
-  const [searchResults, setSearchResults] = useState([])
 
   useEffect(() => {
     try {
@@ -30,25 +28,6 @@ export default function HomeScreen() {
     }
   }, [])
 
-  // searchCountry(searchTerm)
-  // console.log(countries)
-
-  // Search function
-  const handleSearch = async () => {
-    try {
-      setIsLoading(true)
-      const results = await searchCountry(searchTerm)
-      setSearchResults(results)
-      setIsLoading(false)
-      console.log(results)
-    } catch (error) {
-      setIsLoading(false)
-      console.log(error)
-    }
-  }
-  console.log('searchTerm', searchTerm)
-  console.log('searchResults', searchResults)
-
   return (
     <SafeAreaView className="p-3">
       {Platform.OS === 'ios' && <StatusBar style={'auto'} />}
@@ -56,20 +35,12 @@ export default function HomeScreen() {
         <ActivityIndicator />
       ) : (
         <>
-          <Search
-            handleSearch={handleSearch}
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-          />
+          {/* <Search /> */}
           <ScrollView
             contentContainerStyle={{ paddingBottom: 40 }}
             showsVerticalScrollIndicator={false}
           >
-            <Countries
-              countries={countries}
-              results={searchResults}
-              handleSearch={searchCountry}
-            />
+            <Countries countries={countries} handleSearch={searchCountry} />
           </ScrollView>
         </>
       )}
